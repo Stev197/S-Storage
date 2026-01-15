@@ -38,10 +38,6 @@
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
-            background-image: 
-                radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
         }
 
         .container {
@@ -52,12 +48,12 @@
         /* Header */
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding: 20px;
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 10px;
             background: linear-gradient(90deg, var(--accent), #8b5cf6);
@@ -68,9 +64,51 @@
 
         header p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Stats Container */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--glass);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         /* Form */
@@ -78,14 +116,13 @@
             background: var(--bg-card);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 25px;
+            margin-bottom: 30px;
             border: 1px solid var(--glass);
-            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
@@ -93,15 +130,15 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--accent);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         input, textarea {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-primary);
             font-size: 1rem;
             transition: all 0.3s ease;
@@ -113,12 +150,8 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
 
-        input {
-            font-size: 1.1rem;
-        }
-
         textarea {
-            min-height: 200px;
+            min-height: 150px;
             resize: vertical;
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             line-height: 1.5;
@@ -126,15 +159,15 @@
 
         .char-count {
             text-align: right;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             margin-top: 5px;
         }
 
         .btn {
-            padding: 14px 30px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
@@ -143,6 +176,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
         }
 
         .btn-primary {
@@ -153,18 +187,12 @@
         .btn-primary:hover {
             background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
         }
 
         .btn-primary:disabled {
             background-color: #64748b;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
         .btn-danger {
@@ -190,13 +218,13 @@
         /* Notes List */
         .notes-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .notes-header h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
@@ -205,51 +233,51 @@
             color: white;
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
+            width: fit-content;
         }
 
         #notesList {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .note-card {
             background: var(--bg-card);
             backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 20px;
             border: 1px solid var(--glass);
             transition: all 0.3s ease;
-            position: relative;
             display: flex;
             flex-direction: column;
         }
 
         .note-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px var(--shadow);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--shadow);
             border-color: rgba(59, 130, 246, 0.2);
         }
 
         .note-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: var(--text-primary);
             word-break: break-word;
         }
 
         .note-content {
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             flex-grow: 1;
             word-break: break-word;
             overflow: hidden;
             line-height: 1.5;
-            max-height: 120px;
+            max-height: 100px;
             position: relative;
         }
 
@@ -259,17 +287,17 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 40px;
+            height: 30px;
             background: linear-gradient(transparent, var(--bg-card));
         }
 
         .note-date {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #94a3b8;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .note-actions {
@@ -280,28 +308,28 @@
 
         .note-actions .btn {
             flex: 1;
-            padding: 10px;
-            font-size: 0.9rem;
+            padding: 8px;
+            font-size: 0.85rem;
         }
 
         /* Loading & Empty States */
         .loading, .empty-state, .error-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             grid-column: 1 / -1;
         }
 
         .loading i {
-            font-size: 3rem;
+            font-size: 2rem;
             color: var(--accent);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: pulse 1.5s infinite;
         }
 
         .empty-state i, .error-state i {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             opacity: 0.7;
         }
 
@@ -310,7 +338,7 @@
         }
 
         .empty-state h3, .error-state h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--text-primary);
         }
@@ -321,8 +349,9 @@
 
         .empty-state p, .error-state p {
             color: var(--text-secondary);
-            max-width: 500px;
+            max-width: 100%;
             margin: 0 auto 15px;
+            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -342,33 +371,78 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
+        @media (min-width: 640px) {
             header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            #notesList {
-                grid-template-columns: 1fr;
+                font-size: 2.5rem;
             }
             
             .notes-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            #notesList {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .btn {
+                width: auto;
+            }
+            
+            .note-actions .btn {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            .form-container {
+                padding: 30px;
+            }
+            
+            .stat-value {
+                font-size: 2.5rem;
+            }
+            
+            .stat-icon {
+                font-size: 2.5rem;
+            }
+            
+            .notes-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .note-card {
+                padding: 25px;
+            }
+            
+            .note-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #notesList {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -377,7 +451,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--border);
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -393,9 +467,28 @@
             <p>Simpan catatan, kode, dan link penting Anda dengan aman. Data tersimpan secara real-time database.</p>
         </header>
 
+        <!-- Stats Section -->
+        <section class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-value" id="activeUsers">0</div>
+                <div class="stat-label">Pengguna Aktif</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-value" id="totalVisits">0</div>
+                <div class="stat-label">Total Kunjungan</div>
+            </div>
+        </section>
+
         <!-- Form Input Catatan -->
         <section class="form-container">
-            <h2 style="margin-bottom: 25px; color: var(--accent);"><i class="fas fa-plus-circle"></i> Tambah Catatan Baru</h2>
+            <h2 style="margin-bottom: 20px; color: var(--accent);"><i class="fas fa-plus-circle"></i> Tambah Catatan Baru</h2>
             
             <div class="form-group">
                 <label for="noteTitle"><i class="fas fa-heading"></i> Judul Catatan</label>
@@ -422,7 +515,6 @@
             </div>
             
             <div id="notesList">
-                <!-- Catatan akan ditampilkan di sini secara real-time -->
                 <div class="loading">
                     <i class="fas fa-spinner"></i>
                     <p>Memuat catatan...</p>
@@ -443,7 +535,6 @@
             messagingSenderId: "805016544678",
             appId: "1:805016544678:web:aaeb2bef3d6db7786f1b67"
         };
-        // =============================================
 
         // Inisialisasi Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -457,7 +548,10 @@
             serverTimestamp,
             query,
             orderBy,
-            enableIndexedDbPersistence
+            increment,
+            updateDoc,
+            getDoc,
+            setDoc
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Elemen DOM
@@ -468,6 +562,8 @@
         const notesCount = document.getElementById('notesCount');
         const titleCharCount = document.getElementById('titleCharCount');
         const contentCharCount = document.getElementById('contentCharCount');
+        const activeUsersElement = document.getElementById('activeUsers');
+        const totalVisitsElement = document.getElementById('totalVisits');
 
         // Update karakter count
         noteTitleInput.addEventListener('input', () => {
@@ -500,15 +596,112 @@
                 }).format(date);
             } catch (error) {
                 console.error('Error formatting date:', error);
-                return 'Tanggal tidak valid';
+                return 'Baru saja';
             }
         }
 
         // Preview konten (potong jika terlalu panjang)
         function getContentPreview(content) {
             const escapedContent = escapeHtml(content);
-            if (escapedContent.length <= 150) return escapedContent;
-            return escapedContent.substring(0, 150) + '...';
+            if (escapedContent.length <= 100) return escapedContent;
+            return escapedContent.substring(0, 100) + '...';
+        }
+
+        // Generate user ID
+        function getUserId() {
+            let userId = localStorage.getItem('vault_userId');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('vault_userId', userId);
+            }
+            return userId;
+        }
+
+        // Track visits
+        async function trackVisit() {
+            const userId = getUserId();
+            const visitRef = doc(db, "stats", "visits");
+            const userVisitRef = doc(db, "userVisits", userId);
+            
+            try {
+                // Cek apakah user sudah tercatat hari ini
+                const userVisitDoc = await getDoc(userVisitRef);
+                const today = new Date().toDateString();
+                
+                if (!userVisitDoc.exists() || userVisitDoc.data().lastVisit !== today) {
+                    // Update total visits
+                    await updateDoc(visitRef, {
+                        count: increment(1),
+                        lastUpdated: serverTimestamp()
+                    }, { upsert: true });
+                    
+                    // Update user visit record
+                    await setDoc(userVisitRef, {
+                        userId: userId,
+                        lastVisit: today,
+                        updatedAt: serverTimestamp()
+                    });
+                }
+                
+                // Load total visits
+                const visitDoc = await getDoc(visitRef);
+                if (visitDoc.exists()) {
+                    totalVisitsElement.textContent = visitDoc.data().count || 0;
+                }
+            } catch (error) {
+                console.error('Error tracking visit:', error);
+            }
+        }
+
+        // Track active users (sederhana)
+        async function trackActiveUsers() {
+            const userId = getUserId();
+            const userRef = doc(db, "activeSessions", userId);
+            
+            try {
+                // Set user sebagai aktif
+                await setDoc(userRef, {
+                    userId: userId,
+                    lastActive: serverTimestamp(),
+                    userAgent: navigator.userAgent.substring(0, 100)
+                });
+                
+                // Hapus user yang tidak aktif dalam 2 menit
+                setTimeout(async () => {
+                    try {
+                        await deleteDoc(userRef);
+                    } catch (error) {
+                        console.error('Error removing inactive user:', error);
+                    }
+                }, 120000); // 2 menit
+                
+                // Update active users count setiap 30 detik
+                const updateActiveUsers = () => {
+                    const activeUsersQuery = query(collection(db, "activeSessions"));
+                    const unsubscribe = onSnapshot(activeUsersQuery, (snapshot) => {
+                        activeUsersElement.textContent = snapshot.size;
+                    });
+                    
+                    return unsubscribe;
+                };
+                
+                const unsubscribe = updateActiveUsers();
+                
+                // Cleanup saat tab ditutup
+                window.addEventListener('beforeunload', async () => {
+                    try {
+                        await deleteDoc(userRef);
+                        if (typeof unsubscribe === 'function') {
+                            unsubscribe();
+                        }
+                    } catch (error) {
+                        console.error('Error cleaning up user session:', error);
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error tracking active users:', error);
+            }
         }
 
         // Simpan catatan ke Firebase
@@ -516,19 +709,16 @@
             const title = noteTitleInput.value.trim();
             const content = noteContentInput.value.trim();
             
-            // Validasi input
             if (!title || !content) {
                 alert('Judul dan isi catatan tidak boleh kosong!');
                 return;
             }
             
-            // Tampilkan loading
             const originalText = saveBtn.innerHTML;
             saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
             saveBtn.disabled = true;
             
             try {
-                // Simpan ke Firestore
                 const docRef = await addDoc(notesCollection, {
                     title: title,
                     content: content,
@@ -536,7 +726,7 @@
                     updatedAt: serverTimestamp()
                 });
                 
-                console.log('Catatan tersimpan dengan ID:', docRef.id);
+                console.log('Catatan tersimpan:', docRef.id);
                 
                 // Reset form
                 noteTitleInput.value = '';
@@ -544,7 +734,7 @@
                 titleCharCount.textContent = '0';
                 contentCharCount.textContent = '0';
                 
-                // Notifikasi sukses (visual)
+                // Feedback visual
                 saveBtn.innerHTML = '<i class="fas fa-check"></i> Tersimpan!';
                 saveBtn.style.backgroundColor = 'var(--success)';
                 
@@ -555,23 +745,21 @@
                 }, 1500);
                 
             } catch (error) {
-                console.error('Error detail:', error);
+                console.error('Error menyimpan:', error);
                 
                 let errorMessage = 'Gagal menyimpan catatan. ';
                 
                 if (error.code === 'permission-denied') {
                     errorMessage = '❌ ERROR: Aturan Firestore belum diatur. ';
-                    errorMessage += 'Silakan buka Firebase Console → Firestore Database → Rules dan ubah aturan keamanan Firestore.';
+                    errorMessage += 'Silakan buka Firebase Console → Firestore Database → Rules dan ubah aturan keamanan.';
                     
-                    // Tampilkan error lebih detail
                     notesList.innerHTML = `
                         <div class="error-state">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Izin Ditolak oleh Firestore</h3>
+                            <h3>Izin Ditolak</h3>
                             <p>Firestore menolak operasi baca/tulis karena aturan keamanan.</p>
                             <p><strong>Solusi:</strong> Buka Firebase Console → Firestore Database → Rules</p>
-                            <p>Ubah aturan menjadi:</p>
-                            <div style="text-align: left; max-width: 500px; margin: 20px auto; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                            <div style="text-align: left; max-width: 100%; margin: 15px auto; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; word-break: break-word;">
 allow read, write: if true;
                             </div>
                             <p>Kemudian klik "Publish" dan refresh halaman ini.</p>
@@ -579,39 +767,34 @@ allow read, write: if true;
                     `;
                     
                 } else if (error.code === 'unavailable') {
-                    errorMessage = 'Firestore tidak tersedia. Periksa koneksi internet Anda.';
-                } else if (error.code === 'failed-precondition') {
-                    errorMessage = 'Firestore belum diaktifkan. Silakan aktifkan Firestore Database di Firebase Console.';
+                    errorMessage = 'Firestore tidak tersedia. Periksa koneksi internet.';
                 } else {
                     errorMessage += 'Error: ' + error.message;
                 }
                 
                 alert(errorMessage);
-                
                 saveBtn.innerHTML = originalText;
                 saveBtn.disabled = false;
             }
         }
 
-        // Hapus catatan dari Firebase
+        // Hapus catatan
         async function deleteNote(noteId) {
             if (!confirm('Apakah Anda yakin ingin menghapus catatan ini?')) return;
             
             try {
                 const noteDoc = doc(db, "notes", noteId);
                 await deleteDoc(noteDoc);
-                console.log('Catatan dihapus:', noteId);
             } catch (error) {
                 console.error('Error menghapus catatan:', error);
                 alert('Gagal menghapus catatan: ' + error.message);
             }
         }
 
-        // Salin isi catatan ke clipboard
+        // Salin ke clipboard
         function copyToClipboard(content, button) {
             navigator.clipboard.writeText(content)
                 .then(() => {
-                    // Tampilkan notifikasi sukses
                     const originalBtnText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
                     button.style.backgroundColor = 'var(--success)';
@@ -622,54 +805,42 @@ allow read, write: if true;
                     }, 1500);
                 })
                 .catch(err => {
-                    console.error('Gagal menyalin: ', err);
+                    console.error('Gagal menyalin:', err);
                     alert('Gagal menyalin teks ke clipboard');
                 });
         }
 
-        // Inisialisasi Firebase dan tampilkan catatan
+        // Inisialisasi Firebase
         let app, db, notesCollection;
         
         async function initializeFirebase() {
             try {
-                // Inisialisasi aplikasi Firebase
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
-                
-                // Coba aktifkan persistence untuk offline support
-                try {
-                    await enableIndexedDbPersistence(db);
-                    console.log('Firestore persistence diaktifkan');
-                } catch (err) {
-                    if (err.code === 'failed-precondition') {
-                        console.warn('Multiple tabs open, persistence hanya bisa diaktifkan di satu tab');
-                    } else if (err.code === 'unimplemented') {
-                        console.warn('Browser tidak mendukung persistence');
-                    }
-                }
-                
                 notesCollection = collection(db, "notes");
                 
-                // Mulai menampilkan catatan
+                // Track stats
+                await trackVisit();
+                await trackActiveUsers();
+                
+                // Tampilkan catatan
                 displayNotes();
                 
             } catch (error) {
                 console.error('Error inisialisasi Firebase:', error);
-                
                 notesList.innerHTML = `
                     <div class="error-state">
                         <i class="fas fa-exclamation-triangle"></i>
                         <h3>Gagal Menginisialisasi Firebase</h3>
-                        <p>Error: ${error.message}</p>
-                        <p>Pastikan konfigurasi Firebase Anda benar dan koneksi internet tersedia.</p>
+                        <p>${error.message}</p>
+                        <p>Pastikan konfigurasi Firebase Anda benar.</p>
                     </div>
                 `;
             }
         }
 
-        // Tampilkan catatan dari Firebase (real-time)
+        // Tampilkan catatan
         function displayNotes() {
-            // Tampilkan loading
             notesList.innerHTML = `
                 <div class="loading">
                     <i class="fas fa-spinner"></i>
@@ -678,12 +849,9 @@ allow read, write: if true;
             `;
             
             try {
-                // Query untuk mengurutkan berdasarkan tanggal dibuat (terbaru pertama)
                 const q = query(notesCollection, orderBy("createdAt", "desc"));
                 
-                // Listen untuk perubahan data real-time
-                const unsubscribe = onSnapshot(q, 
-                    // Success callback
+                onSnapshot(q, 
                     (snapshot) => {
                         const notes = [];
                         snapshot.forEach((doc) => {
@@ -695,12 +863,8 @@ allow read, write: if true;
                             });
                         });
                         
-                        console.log('Catatan dimuat:', notes.length, 'item');
-                        
-                        // Update counter
                         notesCount.textContent = `${notes.length} catatan`;
                         
-                        // Jika tidak ada catatan
                         if (notes.length === 0) {
                             notesList.innerHTML = `
                                 <div class="empty-state">
@@ -712,7 +876,6 @@ allow read, write: if true;
                             return;
                         }
                         
-                        // Render catatan
                         notesList.innerHTML = '';
                         notes.forEach(note => {
                             const noteCard = document.createElement('div');
@@ -736,7 +899,7 @@ allow read, write: if true;
                             notesList.appendChild(noteCard);
                         });
                         
-                        // Tambahkan event listener untuk tombol hapus
+                        // Event listeners
                         document.querySelectorAll('.delete-btn').forEach(button => {
                             button.addEventListener('click', (e) => {
                                 e.stopPropagation();
@@ -744,7 +907,6 @@ allow read, write: if true;
                             });
                         });
                         
-                        // Tambahkan event listener untuk tombol salin
                         document.querySelectorAll('.copy-btn').forEach(button => {
                             button.addEventListener('click', (e) => {
                                 e.stopPropagation();
@@ -756,40 +918,16 @@ allow read, write: if true;
                             });
                         });
                     },
-                    // Error callback
                     (error) => {
-                        console.error('Error snapshot:', error.code, error.message);
+                        console.error('Error memuat catatan:', error);
                         
                         let errorMessage = '';
-                        
                         if (error.code === 'permission-denied') {
                             errorMessage = `
                                 <div class="error-state">
                                     <i class="fas fa-shield-alt"></i>
-                                    <h3>Akses Ditolak oleh Firestore</h3>
-                                    <p><strong>Masalah:</strong> Aturan keamanan Firestore belum diatur dengan benar.</p>
-                                    <p><strong>Solusi:</strong></p>
-                                    <ol style="text-align: left; max-width: 500px; margin: 20px auto;">
-                                        <li>Buka <a href="https://console.firebase.google.com/" target="_blank" style="color: var(--accent);">Firebase Console</a></li>
-                                        <li>Pilih proyek: <strong>${firebaseConfig.projectId}</strong></li>
-                                        <li>Buka Firestore Database → Rules</li>
-                                        <li>Ubah aturan menjadi:<br>
-                                            <div style="margin: 10px 0; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
-allow read, write: if true;
-                                            </div>
-                                        </li>
-                                        <li>Klik "Publish"</li>
-                                        <li>Refresh halaman ini</li>
-                                    </ol>
-                                </div>
-                            `;
-                        } else if (error.code === 'failed-precondition') {
-                            errorMessage = `
-                                <div class="error-state">
-                                    <i class="fas fa-database"></i>
-                                    <h3>Firestore Belum Diaktifkan</h3>
-                                    <p>Firestore Database belum diaktifkan di Firebase Console.</p>
-                                    <p>Silakan buka Firebase Console → Firestore Database → Create Database</p>
+                                    <h3>Akses Ditolak</h3>
+                                    <p>Aturan Firestore belum diatur dengan benar.</p>
                                 </div>
                             `;
                         } else {
@@ -797,7 +935,6 @@ allow read, write: if true;
                                 <div class="error-state">
                                     <i class="fas fa-exclamation-triangle"></i>
                                     <h3>Gagal memuat catatan</h3>
-                                    <p><strong>Error:</strong> ${error.code}</p>
                                     <p>${error.message}</p>
                                 </div>
                             `;
@@ -808,12 +945,11 @@ allow read, write: if true;
                 );
                 
             } catch (error) {
-                console.error('Error initializing Firestore listener:', error);
+                console.error('Error:', error);
                 notesList.innerHTML = `
                     <div class="error-state">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <h3>Error Inisialisasi</h3>
-                        <p>Terjadi kesalahan saat menginisialisasi Firestore.</p>
+                        <h3>Error</h3>
                         <p>${error.message}</p>
                     </div>
                 `;
@@ -823,14 +959,13 @@ allow read, write: if true;
         // Event Listeners
         saveBtn.addEventListener('click', saveNote);
         
-        // Simpan dengan Ctrl+Enter di textarea
         noteContentInput.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
                 saveNote();
             }
         });
 
-        // Inisialisasi Firebase
+        // Inisialisasi
         initializeFirebase();
     </script>
 </body>
