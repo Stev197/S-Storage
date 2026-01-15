@@ -617,39 +617,44 @@
             return userId;
         }
 
-        // Track visits
+        // Track visits - FIXED VERSION
         async function trackVisit() {
-            const userId = getUserId();
-            const visitRef = doc(db, "stats", "visits");
-            const userVisitRef = doc(db, "userVisits", userId);
+            const visitsRef = doc(db, "stats", "visits");
             
             try {
-                // Cek apakah user sudah tercatat hari ini
-                const userVisitDoc = await getDoc(userVisitRef);
-                const today = new Date().toDateString();
+                // Gunakan transaction-like pattern dengan getDoc dan updateDoc
+                const visitDoc = await getDoc(visitsRef);
                 
-                if (!userVisitDoc.exists() || userVisitDoc.data().lastVisit !== today) {
-                    // Update total visits
-                    await updateDoc(visitRef, {
+                if (visitDoc.exists()) {
+                    // Update existing document
+                    await updateDoc(visitsRef, {
                         count: increment(1),
                         lastUpdated: serverTimestamp()
-                    }, { upsert: true });
-                    
-                    // Update user visit record
-                    await setDoc(userVisitRef, {
-                        userId: userId,
-                        lastVisit: today,
-                        updatedAt: serverTimestamp()
+                    });
+                } else {
+                    // Create new document
+                    await setDoc(visitsRef, {
+                        count: 1,
+                        lastUpdated: serverTimestamp()
                     });
                 }
                 
-                // Load total visits
-                const visitDoc = await getDoc(visitRef);
-                if (visitDoc.exists()) {
-                    totalVisitsElement.textContent = visitDoc.data().count || 0;
-                }
+                // Set up real-time listener
+                const unsubscribe = onSnapshot(visitsRef, (doc) => {
+                    if (doc.exists()) {
+                        const data = doc.data();
+                        totalVisitsElement.textContent = data.count || 0;
+                    }
+                });
+                
+                // Store unsubscribe function for cleanup
+                window.visitsUnsubscribe = unsubscribe;
+                
             } catch (error) {
                 console.error('Error tracking visit:', error);
+                if (error.code === 'permission-denied') {
+                    console.log('Permissions issue with visits tracking');
+                }
             }
         }
 
@@ -666,38 +671,30 @@
                     userAgent: navigator.userAgent.substring(0, 100)
                 });
                 
-                // Hapus user yang tidak aktif dalam 2 menit
-                setTimeout(async () => {
+                // Set up listener untuk active users
+                const activeUsersQuery = collection(db, "activeSessions");
+                const unsubscribe = onSnapshot(activeUsersQuery, (snapshot) => {
+                    activeUsersElement.textContent = snapshot.size;
+                });
+                
+                // Cleanup function
+                const cleanup = async () => {
                     try {
                         await deleteDoc(userRef);
-                    } catch (error) {
-                        console.error('Error removing inactive user:', error);
-                    }
-                }, 120000); // 2 menit
-                
-                // Update active users count setiap 30 detik
-                const updateActiveUsers = () => {
-                    const activeUsersQuery = query(collection(db, "activeSessions"));
-                    const unsubscribe = onSnapshot(activeUsersQuery, (snapshot) => {
-                        activeUsersElement.textContent = snapshot.size;
-                    });
-                    
-                    return unsubscribe;
-                };
-                
-                const unsubscribe = updateActiveUsers();
-                
-                // Cleanup saat tab ditutup
-                window.addEventListener('beforeunload', async () => {
-                    try {
-                        await deleteDoc(userRef);
-                        if (typeof unsubscribe === 'function') {
-                            unsubscribe();
-                        }
+                        if (unsubscribe) unsubscribe();
                     } catch (error) {
                         console.error('Error cleaning up user session:', error);
                     }
-                });
+                };
+                
+                // Cleanup saat tab ditutup
+                window.addEventListener('beforeunload', cleanup);
+                
+                // Juga cleanup jika ada error atau page hide
+                window.addEventListener('pagehide', cleanup);
+                
+                // Store cleanup function
+                window.activeUsersCleanup = cleanup;
                 
             } catch (error) {
                 console.error('Error tracking active users:', error);
@@ -760,7 +757,14 @@
                             <p>Firestore menolak operasi baca/tulis karena aturan keamanan.</p>
                             <p><strong>Solusi:</strong> Buka Firebase Console → Firestore Database → Rules</p>
                             <div style="text-align: left; max-width: 100%; margin: 15px auto; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; word-break: break-word;">
-allow read, write: if true;
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
                             </div>
                             <p>Kemudian klik "Publish" dan refresh halaman ini.</p>
                         </div>
