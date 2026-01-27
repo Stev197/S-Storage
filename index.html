@@ -52,9 +52,6 @@
             color: var(--text-primary);
         }
 
-        /* =============================================
-           ANIMASI BACKGROUND KRIPTO
-        ============================================= */
         .crypto-background {
             position: fixed;
             top: 0;
@@ -378,9 +375,6 @@
             padding: 16px;
         }
 
-        /* =============================================
-           HEADER RESPONSIF
-        ============================================= */
         header {
             text-align: center;
             margin-bottom: 24px;
@@ -414,9 +408,6 @@
             border-radius: 2px;
         }
 
-        /* =============================================
-           STATS CONTAINER RESPONSIF
-        ============================================= */
         .stats-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -481,9 +472,6 @@
             line-height: 1.4;
         }
 
-        /* =============================================
-           FORM CONTAINER RESPONSIF
-        ============================================= */
         .form-container {
             background: var(--bg-card);
             backdrop-filter: blur(10px);
@@ -1821,7 +1809,7 @@
         });
 
         // Konfigurasi Firebase
-        const firebaseConfig = {
+        const firebase = {
             apiKey: "AIzaSyBcixy1PyYTi_krRYUmz8LcvHHxtN5o92w",
             authDomain: "data-penting-c2e60.firebaseapp.com",
             projectId: "data-penting-c2e60",
@@ -2466,7 +2454,7 @@
             }
             
             try {
-                app = initializeFirebaseApp(firebaseConfig);
+                app = initializeFirebaseApp(firebase);
                 db = getFirestore(app);
                 notesCollection = collection(db, "notes");
                 
@@ -2576,3 +2564,4 @@
     </script>
 </body>
 </html>
+
