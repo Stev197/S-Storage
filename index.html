@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -52,6 +53,9 @@
             color: var(--text-primary);
         }
 
+        /* =============================================
+           ANIMASI BACKGROUND KRIPTO
+        ============================================= */
         .crypto-background {
             position: fixed;
             top: 0;
@@ -375,6 +379,9 @@
             padding: 16px;
         }
 
+        /* =============================================
+           HEADER RESPONSIF
+        ============================================= */
         header {
             text-align: center;
             margin-bottom: 24px;
@@ -408,6 +415,9 @@
             border-radius: 2px;
         }
 
+        /* =============================================
+           STATS CONTAINER RESPONSIF
+        ============================================= */
         .stats-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -472,6 +482,9 @@
             line-height: 1.4;
         }
 
+        /* =============================================
+           FORM CONTAINER RESPONSIF
+        ============================================= */
         .form-container {
             background: var(--bg-card);
             backdrop-filter: blur(10px);
@@ -1539,9 +1552,6 @@
     </div>
 
     <script type="module">
-        // =============================================
-        // FUNGSI UTAMA LOGIN
-        // =============================================
 
         // Generate partikel kripto dengan responsif
         function generateCryptoParticles() {
@@ -1572,7 +1582,6 @@
             }
         }
 
-        // Toggle password visibility dengan touch-friendly
         function setupPasswordToggle() {
             const toggleBtn = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('password');
@@ -1588,7 +1597,6 @@
                         '<i class="fas fa-eye-slash"></i>';
                 };
                 
-                // Support both click and touch
                 toggleBtn.addEventListener('click', togglePassword);
                 toggleBtn.addEventListener('touchstart', (e) => {
                     e.preventDefault();
@@ -1597,7 +1605,6 @@
             }
         }
 
-        // Validasi login responsif
         function setupLogin() {
             const loginForm = document.getElementById('loginForm');
             const loginContainer = document.getElementById('loginContainer');
@@ -1614,20 +1621,17 @@
                 return;
             }
             
-            // Handle form submission
             const handleLogin = (e) => {
                 if (e) e.preventDefault();
                 
                 const username = document.getElementById('username').value.trim();
                 const password = document.getElementById('password').value.trim();
                 
-                // Validasi sederhana
                 if (!username || !password) {
                     showLoginError('Harap isi username dan password');
                     return;
                 }
 
-                // Credentials check
                 if ((username === 'Stev' && password === 'Stev') || 
                     (username === 'admin' && password === 'admin123')) {
                     
@@ -1642,7 +1646,6 @@
             
             loginForm.addEventListener('submit', handleLogin);
             
-            // Handle Enter key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && loginContainer.style.display !== 'none') {
                     const activeElement = document.activeElement;
@@ -1699,7 +1702,6 @@
             }, 300);
         }
 
-        // Logout dengan konfirmasi responsif
         function setupLogout() {
             const logoutBtn = document.getElementById('logoutBtn');
             
@@ -1749,14 +1751,7 @@
             }, 4000);
         }
 
-        // =============================================
-        // KODE APLIKASI UTAMA (TIDAK BERUBAH)
-        // =============================================
-        // [Kode JavaScript yang sama seperti sebelumnya tetap di sini]
-        // Untuk menjaga panjang jawaban, bagian ini tetap sama seperti kode asli Anda
-        // Hanya ditambahkan optimasi responsif pada fungsi-fungsi tertentu
 
-        // Fungsi untuk menangani resize window
         function handleResize() {
             generateCryptoParticles();
             
@@ -1771,7 +1766,6 @@
             }
         }
 
-        // Initialize dengan optimasi responsif
         document.addEventListener('DOMContentLoaded', () => {
             // Generate partikel awal
             generateCryptoParticles();
@@ -1789,17 +1783,14 @@
                 }
             }, 300);
             
-            // Handle window resize
             window.addEventListener('resize', handleResize);
             window.addEventListener('orientationchange', () => {
                 setTimeout(handleResize, 100);
             });
             
-            // Handle touch events untuk mobile
             if ('ontouchstart' in window) {
                 document.body.classList.add('touch-device');
                 
-                // Improve touch scrolling
                 document.addEventListener('touchmove', (e) => {
                     if (e.scale !== 1) {
                         e.preventDefault();
@@ -1809,7 +1800,7 @@
         });
 
         // Konfigurasi Firebase
-        const firebase = {
+        const firebaseConfig = {
             apiKey: "AIzaSyBcixy1PyYTi_krRYUmz8LcvHHxtN5o92w",
             authDomain: "data-penting-c2e60.firebaseapp.com",
             projectId: "data-penting-c2e60",
@@ -2454,7 +2445,7 @@
             }
             
             try {
-                app = initializeFirebaseApp(firebase);
+                app = initializeFirebaseApp(firebaseConfig);
                 db = getFirestore(app);
                 notesCollection = collection(db, "notes");
                 
@@ -2564,4 +2555,3 @@
     </script>
 </body>
 </html>
-
